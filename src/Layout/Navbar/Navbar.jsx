@@ -1,56 +1,56 @@
 import clsx from "clsx";
-import { useState } from "react";
-import logoIcon from "../../assets/logo_icon.png";
-import logoName from "../../assets/logo_name.png";
+import Logo from "../../assets/Logo.jsx";
+import config from "../../config";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-	const [active, setActive] = useState(0);
-
+const Navbar = ({ isLight }) => {
 	const items = [
 		{
 			name: "Home",
-			link: "/",
-			color: "text-[#3761B6]",
+			link: config.routes.home,
+			color: " text-blue",
 		},
 		{
 			name: "How",
-			link: "/how",
-			color: "text-[#FFE7A9]",
+			link: config.routes.how,
+			color: "text-yellow",
 		},
 		{
 			name: "Check",
-			link: "/check",
-			color: "text-[#DD4976]",
+			link: config.routes.check,
+			color: "text-red",
 		},
 		{
-			name: "About",
-			link: "/about",
-			color: "text-[#3761B6]",
+			name: "About Us",
+			link: config.routes.about,
+			color: "text-blue",
 		},
 	];
 
-	const style_nav_item = "font-primary cursor-pointer";
-
 	return (
-		<nav className="flex items-center">
-			<div className="flex items-center gap-x-4">
-				<img src={logoIcon} className="w-8" alt="" />
-				<img src={logoName} className="w-[74px]" alt="" />
-			</div>
+		<nav className="relative flex items-center z-[1000]">
+			<Link to="/">
+				<Logo
+					className={clsx(
+						"fill-current w-28",
+						isLight ? "text-white" : "text-black"
+					)}
+				/>
+			</Link>
 			<ul className="flex items-center px-2 ml-auto gap-x-14">
-				{items.map((item, index) => {
+				{items.map((item) => {
 					const styles = clsx(
-						style_nav_item,
-						active === index && `font-extrabold ${item.color}`
+						"font-primary cursor-pointer transition-all",
+						!(item.link === window.location.pathname) &&
+							isLight &&
+							"text-white",
+						item.link === window.location.pathname &&
+							` [text-shadow:1px_0px_0px] ${item.color}`
 					);
 					return (
-						<li
-							key={item.name}
-							className={styles}
-							onClick={() => setActive(index)}
-						>
-							{item.name}
-						</li>
+						<Link key={item.name} to={item.link}>
+							<li className={styles}>{item.name}</li>
+						</Link>
 					);
 				})}
 			</ul>
