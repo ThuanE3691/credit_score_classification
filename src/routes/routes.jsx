@@ -8,17 +8,24 @@ import Check from "../Views/Check";
 import About from "../Views/About";
 
 const routes = [
-	{ path: config.routes.home, component: Home, isLight: false },
-	{ path: config.routes.how, component: How, isLight: true },
+	{
+		path: config.routes.home,
+		component: Home,
+		isLight: false,
+		canScroll: false,
+	},
+	{ path: config.routes.how, component: How, isLight: true, canScroll: false },
 	{
 		path: config.routes.check,
 		component: Check,
 		isLight: false,
+		canScroll: true,
 	},
 	{
 		path: config.routes.about,
 		component: About,
 		isLight: true,
+		canScroll: false,
 	},
 ];
 
