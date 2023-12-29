@@ -11,7 +11,6 @@ function App() {
 				<Routes>
 					{routes.map((route, index) => {
 						const Page = route.component;
-						console.log(route.canScroll);
 						return (
 							<Route
 								path={route.path}
@@ -20,7 +19,7 @@ function App() {
 									<main
 										className={clsx(
 											"relative",
-											route.canScroll === true && "overflow-hidden"
+											route.canScroll === false && "overflow-hidden"
 										)}
 									>
 										<Page>
